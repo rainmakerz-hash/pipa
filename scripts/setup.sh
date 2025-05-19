@@ -270,30 +270,6 @@ cat > /etc/sddm.conf.d/kde_settings.conf << EOF
 Current=breeze
 EOF
 
-# Desktop Environment Installation
-case $de_choice in
-    1)
-        echo "Installing KDE Plasma Desktop..."
-        pacman -S --noconfirm plasma plasma-wayland-session plasma-pa plasma-nm plasma-desktop dolphin kate xorg-server-xwayland || { echo "Failed to install KDE Plasma. Exiting."; exit 1; }
-        systemctl enable sddm
-        ;;
-    2)
-        echo "Installing XFCE Desktop..."
-        pacman -S --noconfirm xfce4 xfce4-goodies xfdesktop xfwm4 xfce4-session xorg-xinit network-manager-applet xfce4-power-manager || { echo "Failed to install XFCE. Exiting."; exit 1; }
-        # Use SDDM for XFCE too
-        systemctl enable sddm
-        ;;
-    3)
-        echo "Installing LXQt Desktop..."
-        pacman -S --noconfirm lxqt lxqt-admin lxqt-config lxqt-globalkeys lxqt-panel lxqt-runner breeze-icons pcmanfm-qt xorg-xinit network-manager-applet || { echo "Failed to install LXQt. Exiting."; exit 1; }
-        systemctl enable sddm
-        ;;
-    *)
-        echo "Invalid choice. Exiting."
-        exit 1
-        ;;
-esac
-
 # Kernel Update and Audio Fix
 echo ""
 echo "=== Arch Linux Kernel 6.14.2 Update ==="
